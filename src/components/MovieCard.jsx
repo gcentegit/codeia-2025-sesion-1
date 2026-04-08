@@ -11,7 +11,7 @@ export default function MovieCard({ movie, showFavorite = true }) {
 
   const posterUrl = movie.poster_path
     ? `${TMDB_CONFIG.imageBaseUrl}/${IMAGE_SIZES.poster}${movie.poster_path}`
-    : '/placeholder-poster.jpg';
+    : '/images/placeholder-poster.svg';
 
   const year = movie.release_date
     ? new Date(movie.release_date).getFullYear()
@@ -35,7 +35,7 @@ export default function MovieCard({ movie, showFavorite = true }) {
             alt={movie.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
             onError={(e) => {
-              e.target.src = '/placeholder-poster.jpg';
+              e.target.src = '/images/placeholder-poster.svg';
             }}
           />
 

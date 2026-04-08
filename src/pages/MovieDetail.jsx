@@ -118,7 +118,7 @@ export default function MovieDetail() {
                       src={
                         person.profile_path
                           ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
-                          : '/placeholder-avatar.jpg'
+                          : '/images/placeholder-avatar.svg'
                       }
                       alt={person.name}
                       className="mx-auto mb-2 aspect-square rounded-full object-cover"

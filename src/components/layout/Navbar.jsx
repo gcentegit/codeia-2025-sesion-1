@@ -1,27 +1,8 @@
-import { Link, useLocation } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useFavorites } from '@/store/selectors';
 
 export default function Navbar() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const location = useLocation();
   const favorites = useFavorites();
-
-  // Limpiar búsqueda al cambiar de ruta
-  useEffect(() => {
-    if (location.pathname !== '/search') {
-      setSearchQuery('');
-    }
-  }, [location.pathname]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
-    }
-  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -56,20 +37,6 @@ export default function Navbar() {
               )}
             </Link>
           </div>
-
-          {/* Buscador */}
-          <form onSubmit={handleSearch} className="flex items-center space-x-2">
-            <Input
-              type="search"
-              placeholder="Buscar películas..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-[150px] sm:w-[250px]"
-            />
-            <Button type="submit" size="icon" variant="ghost">
-              🔍
-            </Button>
-          </form>
         </div>
       </div>
     </nav>

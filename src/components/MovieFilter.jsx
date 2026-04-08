@@ -1,9 +1,12 @@
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { Button } from './ui/button';
 import { Search, Star, Calendar } from 'lucide-react';
+import { useState } from 'react';
 
 export default function MovieFilter({ filters, onFilterChange }) {
   const { search, year, minRating } = filters;
+  const [searchQuery, setSearchQuery] = useState(search);
 
   // Generar años dinámicamente (desde 1950 hasta año actual)
   const currentYear = new Date().getFullYear();
@@ -11,6 +14,13 @@ export default function MovieFilter({ filters, onFilterChange }) {
 
   // Generar opciones de rating (de 1 a 10)
   const ratings = Array.from({ length: 10 }, (_, i) => i + 1);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      onFilterChange({ ...filters, search: searchQuery });
+    }
+  };
 
   return (
     <div className="flex flex-wrap items-end gap-4 rounded-lg border bg-background/95 p-4 shadow-sm">
@@ -20,14 +30,19 @@ export default function MovieFilter({ filters, onFilterChange }) {
           <Search className="h-4 w-4" />
           Nombre
         </Label>
-        <Input
-          id="search"
-          type="text"
-          placeholder="Buscar por nombre..."
-          value={search}
-          onChange={(e) => onFilterChange({ ...filters, search: e.target.value })}
-          className="w-full"
-        />
+        <form onSubmit={handleSearch} className="flex gap-2">
+          <Input
+            id="search"
+            type="search"
+            placeholder="Buscar por nombre..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full"
+          />
+          <Button type="submit" size="icon" variant="ghost">
+            🔍
+          </Button>
+        </form>
       </div>
 
       {/* Filtro por año */}
@@ -77,7 +92,10 @@ export default function MovieFilter({ filters, onFilterChange }) {
         <div className="w-full sm:w-auto">
           <Label className="mb-2 text-sm invisible">Acción</Label>
           <button
-            onClick={() => onFilterChange({ search: '', year: '', minRating: '0' })}
+            onClick={() => {
+              setSearchQuery('');
+              onFilterChange({ search: '', year: '', minRating: '0' });
+            }}
             className="flex h-10 w-full sm:w-auto items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
             type="button"
           >

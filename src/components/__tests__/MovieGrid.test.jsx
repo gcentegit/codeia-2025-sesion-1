@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import MovieGrid from '@/components/MovieGrid';
 
 describe('MovieGrid', () => {
@@ -22,7 +23,9 @@ describe('MovieGrid', () => {
 
   it('renders loading skeletons when loading is true', () => {
     const { container } = render(
-      <MovieGrid movies={[]} loading={true} />
+      <BrowserRouter>
+        <MovieGrid movies={[]} loading={true} />
+      </BrowserRouter>
     );
 
     const skeletons = container.querySelectorAll('.animate-pulse');
@@ -31,7 +34,9 @@ describe('MovieGrid', () => {
 
   it('renders movies when not loading', () => {
     render(
-      <MovieGrid movies={mockMovies} loading={false} />
+      <BrowserRouter>
+        <MovieGrid movies={mockMovies} loading={false} />
+      </BrowserRouter>
     );
 
     expect(screen.getByText('Movie 1')).toBeInTheDocument();
@@ -40,7 +45,9 @@ describe('MovieGrid', () => {
 
   it('renders empty state when no movies', () => {
     render(
-      <MovieGrid movies={[]} loading={false} />
+      <BrowserRouter>
+        <MovieGrid movies={[]} loading={false} />
+      </BrowserRouter>
     );
 
     expect(screen.getByText(/No se encontraron películas/i)).toBeInTheDocument();
@@ -48,7 +55,9 @@ describe('MovieGrid', () => {
 
   it('renders correct number of movies', () => {
     const { container } = render(
-      <MovieGrid movies={mockMovies} loading={false} />
+      <BrowserRouter>
+        <MovieGrid movies={mockMovies} loading={false} />
+      </BrowserRouter>
     );
 
     const movieCards = container.querySelectorAll('a');
@@ -57,7 +66,9 @@ describe('MovieGrid', () => {
 
   it('passes showFavorite prop to MovieCard', () => {
     const { container } = render(
-      <MovieGrid movies={mockMovies} loading={false} showFavorite={true} />
+      <BrowserRouter>
+        <MovieGrid movies={mockMovies} loading={false} showFavorite={true} />
+      </BrowserRouter>
     );
 
     const favoriteButtons = container.querySelectorAll('button');

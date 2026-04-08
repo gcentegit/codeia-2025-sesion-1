@@ -1,0 +1,6 @@
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="75" cy="75" r="75" fill="#374151"/>
+  <circle cx="75" cy="55" r="30" fill="#4b5563"/>
+  <path d="M 25 130 Q 75 80 125 130" fill="#4b5563"/>
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="10" fill="#9ca3af" text-anchor="middle">No disponible</text>
+</svg>
