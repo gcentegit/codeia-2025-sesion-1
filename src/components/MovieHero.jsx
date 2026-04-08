@@ -25,34 +25,35 @@ export default function MovieHero({ movie }) {
             alt={movie.title}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+          {/* Overlay oscuro para garantizar contraste - cumple WCAG AA */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-black/60 to-black/40" />
         </div>
       )}
 
       {/* Content */}
       <div className="container relative z-10 flex h-full items-end pb-12">
-        <div className="max-w-2xl space-y-4">
-          <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
+        <div className="max-w-2xl space-y-4 drop-shadow-2xl">
+          <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl text-white">
             {movie.title}
           </h1>
 
           {movie.tagline && (
-            <p className="text-lg text-muted-foreground italic">
+            <p className="text-lg text-gray-200 italic drop-shadow-md">
               {movie.tagline}
             </p>
           )}
 
           <div className="flex flex-wrap items-center gap-4">
-            <Badge variant="secondary" className="flex items-center gap-1">
+            <Badge variant="secondary" className="flex items-center gap-1 bg-yellow-500 text-black hover:bg-yellow-400 border-yellow-600">
               ⭐ {rating}
             </Badge>
 
-            <Badge variant="outline" className="flex items-center gap-1">
+            <Badge variant="outline" className="flex items-center gap-1 bg-gray-900 text-white hover:bg-gray-800 border-gray-600">
               📅 {year}
             </Badge>
 
             {movie.runtime && (
-              <Badge variant="outline" className="flex items-center gap-1">
+              <Badge variant="outline" className="flex items-center gap-1 bg-gray-900 text-white hover:bg-gray-800 border-gray-600">
                 ⏱️ {runtime}
               </Badge>
             )}
@@ -60,7 +61,7 @@ export default function MovieHero({ movie }) {
 
           <div className="flex flex-wrap gap-2">
             {movie.genres?.map((genre) => (
-              <Badge key={genre.id} variant="default">
+              <Badge key={genre.id} className="bg-blue-600 text-white hover:bg-blue-500 border-blue-700">
                 {genre.name}
               </Badge>
             ))}
@@ -68,7 +69,7 @@ export default function MovieHero({ movie }) {
 
           <div className="flex gap-4">
             {movie.videos?.results?.length > 0 && (
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2 bg-red-600 hover:bg-red-700 text-white drop-shadow-lg">
                 ▶️ Ver Trailer
               </Button>
             )}
