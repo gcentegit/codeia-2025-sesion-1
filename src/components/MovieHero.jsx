@@ -19,26 +19,22 @@ export default function MovieHero({ movie }) {
     <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
       {/* Backdrop */}
       {backdropUrl && (
-        <div className="absolute inset-0">
-          <img
-            src={backdropUrl}
-            alt={movie.title}
-            className="h-full w-full object-cover"
-          />
-          {/* Overlay oscuro para garantizar contraste - cumple WCAG AA */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-black/60 to-black/40" />
-        </div>
+        <img
+          src={backdropUrl}
+          alt={movie.title}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       )}
 
       {/* Content */}
       <div className="container relative z-10 flex h-full items-end pb-12">
-        <div className="max-w-2xl space-y-4 drop-shadow-2xl">
+        <div className="max-w-2xl rounded-2xl bg-black/75 p-6 shadow-2xl backdrop-blur-sm sm:p-8 md:p-10">
           <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl text-white">
             {movie.title}
           </h1>
 
           {movie.tagline && (
-            <p className="text-lg text-gray-200 italic drop-shadow-md">
+            <p className="text-lg text-gray-200 italic">
               {movie.tagline}
             </p>
           )}
@@ -69,7 +65,7 @@ export default function MovieHero({ movie }) {
 
           <div className="flex gap-4">
             {movie.videos?.results?.length > 0 && (
-              <Button size="lg" className="gap-2 bg-red-600 hover:bg-red-700 text-white drop-shadow-lg">
+              <Button size="lg" className="gap-2 bg-red-600 hover:bg-red-700 text-white">
                 ▶️ Ver Trailer
               </Button>
             )}
